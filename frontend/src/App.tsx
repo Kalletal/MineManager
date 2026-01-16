@@ -3,6 +3,14 @@ import { io } from 'socket.io-client';
 import { ServerState, Portal, ServerType } from './types';
 import { translations, languages } from './i18n';
 
+declare global {
+  interface Window {
+    electron?: {
+      quitApp: () => void;
+    };
+  }
+}
+
 const socket = io('/dashboard');
 
 // Auth & i18n context
@@ -218,7 +226,13 @@ function Dashboard() {
             <button className="secondary" style={{ background: 'linear-gradient(135deg, #ef4444, #dc2626)', width: '100%', padding: '8px 16px', height: '36px' }} onClick={async () => {
               if (confirm('Arrêter MineManager ? Tous les serveurs seront arrêtés.')) {
                 await api.post('/api/system/shutdown', {}, token!);
-                setTimeout(() => window.close(), 1000);
+                setTimeout(() => {
+                  if (window.electron?.quitApp) {
+                    window.electron.quitApp();
+                  } else {
+                    window.close();
+                  }
+                }, 1000);
               }
             }}>⏻ Arrêter</button>
           </div>

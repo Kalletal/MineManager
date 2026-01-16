@@ -1,4 +1,4 @@
-const { app, BrowserWindow, dialog } = require('electron');
+const { app, BrowserWindow, dialog, ipcMain } = require('electron');
 const path = require('path');
 
 let mainWindow;
@@ -10,7 +10,8 @@ function createWindow() {
     autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: false,
-      contextIsolation: true
+      contextIsolation: true,
+      preload: path.join(__dirname, 'preload.js')
     }
   });
 
@@ -35,6 +36,13 @@ function createWindow() {
     mainWindow = null;
   });
 }
+
+ipcMain.on('quit-app', () => {
+  if (mainWindow) {
+    mainWindow.destroy();
+  }
+  app.quit();
+});
 
 app.whenReady().then(createWindow);
 
