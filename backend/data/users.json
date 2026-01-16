@@ -1,0 +1,14 @@
+{
+  "admin": {
+    "username": "admin",
+    "password": "$2b$10$AoFzbkZWfITG0s5tbKDr5OWy8bgnrlyDk5VdxaVmWbV8wOn9oPreq",
+    "lang": "fr",
+    "role": "admin"
+  },
+  "keo": {
+    "username": "keo",
+    "password": "$2b$10$yO7L3EbnMcjvbGsRW/u7VOuA81OZt2.i9KWtOeyQIuiY5L5w0IkB2",
+    "lang": "en",
+    "role": "user"
+  }
+}

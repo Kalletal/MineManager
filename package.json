@@ -1,0 +1,5 @@
+{
+  "name": "minemanager",
+  "private": true,
+  "workspaces": ["backend", "frontend"]
+}
